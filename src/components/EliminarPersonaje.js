@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { deletePersonaje } from '../api';
+import { getAllPersonajes } from '../api';
 
 function EliminarPersonaje() {
     const [idEliminar, setIdEliminar] = useState('');
     const [mensaje, setMensaje] = useState('');
     const [error, setError] = useState(null);
+    const [personajes, setPersonajes] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(()=>{
+        const fetchPersonajes = async ()=>{
+            try{
+                const data = await getAllPersonajes();
+                setPersonajes(data);
+                setLoading(false);
+            } catch (error) {
+                setError(error.message);
+                setLoading(false);
+            }
+        };
+        fetchPersonajes();
+    }, []);
 
     const handleChange = (e) => {
         setIdEliminar(e.target.value);
@@ -27,9 +44,19 @@ function EliminarPersonaje() {
         <div>
             <h2>Eliminar Personaje</h2>
             <div>
-                <h2>Lista de Personajes</h2>
-                
-            </div>
+            <h2>Lista de Personajes</h2>
+            {personajes.length > 0 ? (
+                <ul>
+                    {personajes.map(personaje => (
+                        <li key={personaje.id}>
+                            ID: {personaje.id}, Nombre: {personaje.name}, Email: {personaje.email}, Whatsapp: {personaje.whatsapp}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No hay personajes registrados.</p>
+            )}
+        </div>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>ID del Personaje a Eliminar:</label>
