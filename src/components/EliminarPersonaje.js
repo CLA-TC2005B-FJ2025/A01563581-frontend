@@ -26,6 +26,10 @@ function EliminarPersonaje() {
     return (
         <div>
             <h2>Eliminar Personaje</h2>
+            <div>
+                <h2>Lista de Personajes</h2>
+                
+            </div>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>ID del Personaje a Eliminar:</label>

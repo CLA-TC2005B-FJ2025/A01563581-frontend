@@ -1,4 +1,4 @@
-const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'; // Asegúrate de tener REACT_APP_API_BASE_URL en tu .env
+const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'https://psychic-telegram-r4797qpj5jx72pqq-5000.app.github.dev/'; // Asegúrate de tener REACT_APP_API_BASE_URL en tu .env
 
 const handleResponse = async (response) => {
     if (!response.ok) {
